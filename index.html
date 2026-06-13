@@ -6,6 +6,8 @@
     <title>Legal Team Intake - Advocate Dildeep Singh</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
+        /* B11: Define text-xxs since it is not a standard Tailwind utility */
+        .text-xxs { font-size: 0.625rem; line-height: 0.875rem; }
         .uploading { pointer-events: none; opacity: 0.6; }
     </style>
 </head>
@@ -20,17 +22,22 @@
                     <h1 class="text-xl sm:text-2xl font-serif font-bold tracking-wide text-slate-100">LEGAL TEAM OF ADVOCATE DILDEEP SINGH</h1>
                     <p class="text-slate-400 text-xs sm:text-sm font-medium mt-1">Chamber No. 53, District Court, Faridkot, Punjab</p>
                 </div>
+                <!-- B13: Removed conflicting `block` class from anchor tag that also had `flex` -->
                 <div class="bg-slate-800/80 border border-slate-700 rounded-lg px-4 py-2 text-center sm:text-right shrink-0 hover:bg-slate-800 transition-colors">
                     <span class="block text-slate-400 text-[10px] uppercase font-bold tracking-wider">Connect on WhatsApp</span>
-                    <a href="https://wa.me/919780600978" target="_blank" rel="noopener noreferrer" class="text-emerald-400 font-bold text-sm sm:text-base block mt-0.5 flex items-center justify-center sm:justify-end gap-1.5">
-                        <svg class="w-4 h-4 fill-current text-emerald-400" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.66.986 3.292 1.482 4.195 1.486 5.426 0 9.84-4.415 9.843-9.843.002-2.63-1.012-5.101-2.859-6.95S13.568 1.005 12.01 1.005c-5.424 0-9.837 4.413-9.84 9.842-.001 1.954.512 3.578 1.503 5.253l-.98 3.58 3.68-.965zM17.35 14.86c-.287-.144-1.696-.838-1.957-.934-.26-.096-.45-.144-.64.144-.19.287-.736.934-.903 1.122-.167.188-.334.212-.62.068-.287-.144-1.21-.446-2.306-1.425-.853-.761-1.428-1.7-1.595-1.988-.167-.287-.018-.442.126-.584.13-.127.287-.335.43-.502.144-.167.192-.287.287-.479.096-.192.048-.36-.024-.503-.072-.143-.64-1.54-.877-2.113-.23-.558-.465-.482-.64-.492-.166-.008-.356-.01-.547-.01-.19 0-.501.071-.762.356-.26.287-1 .977-1 2.387s1.022 2.774 1.164 2.966c.143.192 2.013 3.074 4.877 4.318.681.296 1.213.474 1.627.605.686.218 1.312.187 1.806.114.55-.082 1.696-.693 1.933-1.362.237-.669.237-1.241.166-1.362-.07-.121-.26-.192-.546-.337z"/></svg>97806-00978</a>
+                    <a href="https://wa.me/919780600978" target="_blank" rel="noopener noreferrer" class="text-emerald-400 font-bold text-sm sm:text-base mt-0.5 flex items-center justify-center sm:justify-end gap-1.5">
+                        <svg class="w-4 h-4 fill-current text-emerald-400" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.66.986 3.292 1.482 4.195 1.486 5.426 0 9.84-4.415 9.843-9.843.002-2.63-1.012-5.101-2.859-6.95S13.568 1.005 12.01 1.005c-5.424 0-9.837 4.413-9.84 9.842-.001 1.954.512 3.578 1.503 5.253l-.98 3.58 3.68-.965zM17.35 14.86c-.287-.144-1.696-.838-1.957-.934-.26-.096-.45-.144-.64.144-.19.287-.736.934-.903 1.122-.167.188-.334.212-.62.068-.287-.144-1.21-.446-2.306-1.425-.853-.761-1.428-1.7-1.595-1.988-.167-.287-.018-.442.126-.584.13-.127.287-.335.43-.502.144-.167.192-.287.287-.479.096-.192.048-.36-.024-.503-.072-.143-.64-1.54-.877-2.113-.23-.558-.465-.482-.64-.492-.166-.008-.356-.01-.547-.01-.19 0-.501.071-.762.356-.26.287-1 .977-1 2.387s1.022 2.774 1.164 2.966c.143.192 2.013 3.074 4.877 4.318.681.296 1.213.474 1.627.605.686.218 1.312.187 1.806.114.55-.082 1.696-.693 1.933-1.362.237-.669.237-1.241.166-1.362-.07-.121-.26-.192-.546-.337z"/></svg>
+                        97806-00978
+                    </a>
                 </div>
             </div>
         </header>
 
-        <form id="sopForm" class="bg-white p-4 sm:p-6 rounded-b-xl shadow-md space-y-6 sm:space-y-8" onsubmit="handleFormSubmit(event)">
-            
-            <div class="bg-slate-50 p-4 rounded-lg border-2 border-slate-300 shadow-sm space-y-4">
+        <!-- B10: Removed onsubmit from form tag; validation + submit handled entirely in JS -->
+        <form id="sopForm" class="bg-white p-4 sm:p-6 rounded-b-xl shadow-md space-y-6 sm:space-y-8">
+
+            <!-- INTAKE BLOCK -->
+            <div data-block="intakeBlock" class="bg-slate-50 p-4 rounded-lg border-2 border-slate-300 shadow-sm space-y-4">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Select Deed Type</label>
@@ -42,12 +49,13 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Assigned Executive (Staff Name)</label>
-                        <input type="text" id="assignedExecutiveField" required class="w-full bg-white border border-slate-300 rounded h-11 sm:h-9 px-3 text-sm focus:outline-none focus:border-blue-500">
+                        <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Assigned Executive (Staff Name) <span class="text-red-500">*</span></label>
+                        <input type="text" id="assignedExecutiveField" class="w-full bg-white border border-slate-300 rounded h-11 sm:h-9 px-3 text-sm focus:outline-none focus:border-blue-500" placeholder="Required">
                     </div>
                 </div>
 
                 <div id="conditionalSections" class="space-y-4 pt-2">
+                    <!-- LEASE BLOCK -->
                     <div id="deed-lease-block" class="conditional-block hidden bg-orange-50/70 p-4 border border-orange-300 rounded-lg shadow-sm">
                         <span class="bg-orange-600 text-white text-xxs font-bold uppercase px-2 py-0.5 rounded">Required Lease Parameters</span>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
@@ -60,14 +68,16 @@
                         </div>
                     </div>
 
+                    <!-- MODT BLOCK -->
                     <div id="deed-modt-block" class="conditional-block hidden bg-blue-50/70 p-4 border border-blue-300 rounded-lg shadow-sm">
                         <span class="bg-blue-600 text-white text-xxs font-bold uppercase px-2 py-0.5 rounded">Required Mortgage Parameters</span>
                         <div class="grid grid-cols-1 gap-4 mt-3">
                             <div>
                                 <label class="block text-xs font-bold text-blue-900 uppercase mb-2">Bank Sanction Letter Copy</label>
-                                <label class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-blue-400 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                    <span class="text-xs font-black text-blue-900 tracking-wider uppercase">[ CLICK TO UPLOAD SANCTION LETTER ]</span>
-                                    <input type="file" id="bankSanctionLetterFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                                <!-- A1/A2 FIX: file input now has data-file-id and is managed via fileStore, NOT via innerHTML replacement -->
+                                <label id="label_Bank_Sanction_Letter" class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-blue-400 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                    <span class="text-xs font-black text-blue-900 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD SANCTION LETTER ]</span>
+                                    <input type="file" data-file-id="Bank_Sanction_Letter" data-block-target="intakeBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                                 </label>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -77,23 +87,32 @@
                         </div>
                     </div>
 
-                    <div id="deed-transfer-block" class="conditional-block hidden bg-emerald-50/70 p-4 border border-emerald-300 rounded-lg shadow-sm">
-                        <span class="bg-emerald-600 text-white text-xxs font-bold uppercase px-2 py-0.5 rounded">Required Transfer Parameters</span>
-                        <div class="mt-3"><label class="block text-xs font-bold text-emerald-900 uppercase mb-1">Buy / Sell Value</label><input type="number" id="buySellValue" class="w-full h-11 bg-white border border-emerald-300 rounded px-3 text-sm"></div>
+                    <!-- B2/B1 FIX: Sale and Transfer deeds each have their own labelled block -->
+                    <!-- SALE BLOCK -->
+                    <div id="deed-sale-block" class="conditional-block hidden bg-emerald-50/70 p-4 border border-emerald-300 rounded-lg shadow-sm">
+                        <span class="bg-emerald-600 text-white text-xxs font-bold uppercase px-2 py-0.5 rounded">Required Sale Parameters</span>
+                        <div class="mt-3"><label class="block text-xs font-bold text-emerald-900 uppercase mb-1">Sale Consideration Value (₹)</label><input type="number" id="saleDeedValue" class="w-full h-11 bg-white border border-emerald-300 rounded px-3 text-sm"></div>
+                    </div>
+
+                    <!-- TRANSFER BLOCK -->
+                    <div id="deed-transfer-block" class="conditional-block hidden bg-teal-50/70 p-4 border border-teal-300 rounded-lg shadow-sm">
+                        <span class="bg-teal-600 text-white text-xxs font-bold uppercase px-2 py-0.5 rounded">Required Transfer Parameters</span>
+                        <div class="mt-3"><label class="block text-xs font-bold text-teal-900 uppercase mb-1">Buy / Sell Value (₹)</label><input type="number" id="buySellValue" class="w-full h-11 bg-white border border-teal-300 rounded px-3 text-sm"></div>
                     </div>
                 </div>
             </div>
 
-            <section class="border-2 border-purple-200 rounded-lg p-4 sm:p-5 bg-purple-50/10 shadow-xs">
+            <!-- SELLER BLOCK -->
+            <section data-block="sellerBlock" class="border-2 border-purple-200 rounded-lg p-4 sm:p-5 bg-purple-50/10 shadow-xs">
                 <div class="bg-purple-800 text-white px-3 py-2 rounded font-bold text-xs sm:text-sm tracking-wider uppercase mb-4 shadow-sm">
-                    1. Seller KYC & Authority Documents
+                    1. Seller KYC &amp; Authority Documents
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold text-purple-900 mb-2">Seller Constitution Profile:</label>
                     <div class="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap sm:gap-4">
-                        <label class="flex items-center text-sm p-2 bg-purple-50/50 border border-purple-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="sellerProfile" value="individual" checked onclick="toggleProfileFields('seller', 'individual')" class="w-4 h-4 mr-3 sm:mr-2 accent-purple-800"> Individual</label>
-                        <label class="flex items-center text-sm p-2 bg-purple-50/50 border border-purple-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="sellerProfile" value="bank" onclick="toggleProfileFields('seller', 'bank')" class="w-4 h-4 mr-3 sm:mr-2 accent-purple-800"> Bank Entity</label>
-                        <label class="flex items-center text-sm p-2 bg-purple-50/50 border border-purple-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="sellerProfile" value="company" onclick="toggleProfileFields('seller', 'company')" class="w-4 h-4 mr-3 sm:mr-2 accent-purple-800"> Company Entity</label>
+                        <label class="flex items-center text-sm p-2 bg-purple-50/50 border border-purple-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="sellerProfile" value="individual" checked onchange="toggleProfileFields('seller', 'individual')" class="w-4 h-4 mr-3 sm:mr-2 accent-purple-800"> Individual</label>
+                        <label class="flex items-center text-sm p-2 bg-purple-50/50 border border-purple-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="sellerProfile" value="bank" onchange="toggleProfileFields('seller', 'bank')" class="w-4 h-4 mr-3 sm:mr-2 accent-purple-800"> Bank Entity</label>
+                        <label class="flex items-center text-sm p-2 bg-purple-50/50 border border-purple-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="sellerProfile" value="company" onchange="toggleProfileFields('seller', 'company')" class="w-4 h-4 mr-3 sm:mr-2 accent-purple-800"> Company Entity</label>
                     </div>
                 </div>
 
@@ -102,16 +121,16 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Seller Aadhaar Card Copy</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase">[ CLICK TO UPLOAD AADHAAR CARD ]</span>
-                                <input type="file" id="sellerAadhaarFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Seller_Aadhaar_Card" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AADHAAR CARD ]</span>
+                                <input type="file" data-file-id="Seller_Aadhaar_Card" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Seller PAN Card Copy</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase">[ CLICK TO UPLOAD PAN CARD ]</span>
-                                <input type="file" id="sellerPanFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Seller_PAN_Card" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD PAN CARD ]</span>
+                                <input type="file" data-file-id="Seller_PAN_Card" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
@@ -126,16 +145,16 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Bank Employee ID Card Copy</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase">[ CLICK TO UPLOAD EMPLOYEE ID ]</span>
-                                <input type="file" id="sellerBankEmpIdFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Seller_Bank_Employee_ID" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD EMPLOYEE ID ]</span>
+                                <input type="file" data-file-id="Seller_Bank_Employee_ID" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Power of Attorney (PoA)</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase">[ CLICK TO UPLOAD POA DOCUMENT ]</span>
-                                <input type="file" id="sellerBankPoaFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Seller_Power_of_Attorney" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD POA DOCUMENT ]</span>
+                                <input type="file" data-file-id="Seller_Power_of_Attorney" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
@@ -149,17 +168,17 @@
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Authorized Representative ID / Aadhaar</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase">[ CLICK TO UPLOAD AUTH ID COPY ]</span>
-                                <input type="file" id="sellerCompanyAuthIdFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Authorised Representative ID / Aadhaar</label>
+                            <label id="label_Seller_Representative_ID" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AUTH ID COPY ]</span>
+                                <input type="file" data-file-id="Seller_Representative_ID" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Board Resolution or PoA</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase">[ CLICK TO UPLOAD RESOLUTION / POA ]</span>
-                                <input type="file" id="sellerCompanyResolutionFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Seller_Board_Resolution" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD RESOLUTION / POA ]</span>
+                                <input type="file" data-file-id="Seller_Board_Resolution" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
@@ -167,16 +186,17 @@
                 </div>
             </section>
 
-            <section class="border-2 border-teal-200 rounded-lg p-4 sm:p-5 bg-teal-50/10 shadow-xs">
+            <!-- BUYER BLOCK -->
+            <section data-block="buyerBlock" class="border-2 border-teal-200 rounded-lg p-4 sm:p-5 bg-teal-50/10 shadow-xs">
                 <div class="bg-teal-800 text-white px-3 py-2 rounded font-bold text-xs sm:text-sm tracking-wider uppercase mb-4 shadow-sm">
-                    2. Buyer KYC & Authority Documents
+                    2. Buyer KYC &amp; Authority Documents
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold text-teal-900 mb-2">Buyer Constitution Profile:</label>
                     <div class="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap sm:gap-4">
-                        <label class="flex items-center text-sm p-2 bg-teal-50/50 border border-teal-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="buyerProfile" value="individual" checked onclick="toggleProfileFields('buyer', 'individual')" class="w-4 h-4 mr-3 sm:mr-2 accent-teal-800"> Individual</label>
-                        <label class="flex items-center text-sm p-2 bg-teal-50/50 border border-teal-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="buyerProfile" value="bank" onclick="toggleProfileFields('buyer', 'bank')" class="w-4 h-4 mr-3 sm:mr-2 accent-teal-800"> Bank Entity</label>
-                        <label class="flex items-center text-sm p-2 bg-teal-50/50 border border-teal-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="buyerProfile" value="company" onclick="toggleProfileFields('buyer', 'company')" class="w-4 h-4 mr-3 sm:mr-2 accent-teal-800"> Company Entity</label>
+                        <label class="flex items-center text-sm p-2 bg-teal-50/50 border border-teal-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="buyerProfile" value="individual" checked onchange="toggleProfileFields('buyer', 'individual')" class="w-4 h-4 mr-3 sm:mr-2 accent-teal-800"> Individual</label>
+                        <label class="flex items-center text-sm p-2 bg-teal-50/50 border border-teal-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="buyerProfile" value="bank" onchange="toggleProfileFields('buyer', 'bank')" class="w-4 h-4 mr-3 sm:mr-2 accent-teal-800"> Bank Entity</label>
+                        <label class="flex items-center text-sm p-2 bg-teal-50/50 border border-teal-200 rounded sm:bg-transparent sm:border-none cursor-pointer"><input type="radio" name="buyerProfile" value="company" onchange="toggleProfileFields('buyer', 'company')" class="w-4 h-4 mr-3 sm:mr-2 accent-teal-800"> Company Entity</label>
                     </div>
                 </div>
 
@@ -185,16 +205,16 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Buyer Aadhaar Card Copy</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase">[ CLICK TO UPLOAD AADHAAR CARD ]</span>
-                                <input type="file" id="buyerAadhaarFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Buyer_Aadhaar_Card" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AADHAAR CARD ]</span>
+                                <input type="file" data-file-id="Buyer_Aadhaar_Card" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Buyer PAN Card Copy</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase">[ CLICK TO UPLOAD PAN CARD ]</span>
-                                <input type="file" id="buyerPanFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Buyer_PAN_Card" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD PAN CARD ]</span>
+                                <input type="file" data-file-id="Buyer_PAN_Card" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
@@ -209,16 +229,16 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Bank Employee ID Card Copy</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase">[ CLICK TO UPLOAD EMPLOYEE ID ]</span>
-                                <input type="file" id="buyerBankEmpIdFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Buyer_Bank_Employee_ID" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD EMPLOYEE ID ]</span>
+                                <input type="file" data-file-id="Buyer_Bank_Employee_ID" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Power of Attorney (PoA)</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase">[ CLICK TO UPLOAD POA DOCUMENT ]</span>
-                                <input type="file" id="buyerBankPoaFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Buyer_Power_of_Attorney" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD POA DOCUMENT ]</span>
+                                <input type="file" data-file-id="Buyer_Power_of_Attorney" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
@@ -232,17 +252,17 @@
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Authorized Representative ID / Aadhaar</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase">[ CLICK TO UPLOAD AUTH ID COPY ]</span>
-                                <input type="file" id="buyerCompanyAuthIdFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Authorised Representative ID / Aadhaar</label>
+                            <label id="label_Buyer_Representative_ID" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AUTH ID COPY ]</span>
+                                <input type="file" data-file-id="Buyer_Representative_ID" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Board Resolution or PoA</label>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase">[ CLICK TO UPLOAD RESOLUTION / POA ]</span>
-                                <input type="file" id="buyerCompanyResolutionFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Buyer_Board_Resolution" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD RESOLUTION / POA ]</span>
+                                <input type="file" data-file-id="Buyer_Board_Resolution" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
@@ -250,7 +270,8 @@
                 </div>
             </section>
 
-            <section class="border-2 border-blue-200 rounded-lg p-4 sm:p-5 bg-blue-50/10 shadow-xs">
+            <!-- WITNESS BLOCK -->
+            <section data-block="witnessBlock" class="border-2 border-blue-200 rounded-lg p-4 sm:p-5 bg-blue-50/10 shadow-xs">
                 <div class="bg-blue-800 text-white px-3 py-2 rounded font-bold text-xs sm:text-sm tracking-wider uppercase mb-4 shadow-sm">
                     3. Mandatory Transaction Witnesses
                 </div>
@@ -258,10 +279,10 @@
                     <div class="p-3 bg-white rounded-xl border border-blue-200 shadow-xs space-y-3">
                         <span class="text-xs font-bold text-blue-700 uppercase block">Witness 1: Personal Witness</span>
                         <div>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[95px] border-2 border-dashed border-blue-300 rounded-xl bg-blue-50/20 cursor-pointer p-2 text-center">
-                                <span class="text-[11px] font-black text-blue-950 tracking-wider uppercase">[ CLICK TO UPLOAD AADHAAR CARD ]</span>
-                                <span class="text-[9px] text-slate-500 font-medium">Front & Back Combined Copy</span>
-                                <input type="file" id="witness1AadhaarFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Witness_1_Aadhaar" class="flex flex-col items-center justify-center w-full min-h-[95px] border-2 border-dashed border-blue-300 rounded-xl bg-blue-50/20 cursor-pointer p-2 text-center">
+                                <span class="text-[11px] font-black text-blue-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD AADHAAR CARD ]</span>
+                                <span class="text-[9px] text-slate-500 font-medium pointer-events-none">Front &amp; Back Combined Copy</span>
+                                <input type="file" data-file-id="Witness_1_Aadhaar" data-block-target="witnessBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div><label class="block text-xxs font-bold text-slate-500 uppercase">Mobile Number</label><input type="tel" id="witness1Mobile" class="w-full border border-slate-300 rounded h-11 px-2 text-sm mt-1"></div>
@@ -269,10 +290,10 @@
                     <div class="p-3 bg-white rounded-xl border border-blue-200 shadow-xs space-y-3">
                         <span class="text-xs font-bold text-blue-700 uppercase block">Witness 2: Govt Approved Witness</span>
                         <div>
-                            <label class="flex flex-col items-center justify-center w-full min-h-[95px] border-2 border-dashed border-blue-300 rounded-xl bg-blue-50/20 cursor-pointer p-2 text-center">
-                                <span class="text-[11px] font-black text-blue-950 tracking-wider uppercase">[ CLICK TO UPLOAD GOVT APPROVED ID ]</span>
-                                <span class="text-[9px] text-slate-500 font-medium">Numberdaar / Advocate / MC</span>
-                                <input type="file" id="witness2GovtIdFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                            <label id="label_Witness_2_Govt_ID" class="flex flex-col items-center justify-center w-full min-h-[95px] border-2 border-dashed border-blue-300 rounded-xl bg-blue-50/20 cursor-pointer p-2 text-center">
+                                <span class="text-[11px] font-black text-blue-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD GOVT APPROVED ID ]</span>
+                                <span class="text-[9px] text-slate-500 font-medium pointer-events-none">Numberdaar / Advocate / MC</span>
+                                <input type="file" data-file-id="Witness_2_Govt_ID" data-block-target="witnessBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div><label class="block text-xxs font-bold text-slate-500 uppercase">Mobile Number</label><input type="tel" id="witness2Mobile" class="w-full border border-slate-300 rounded h-11 px-2 text-sm mt-1"></div>
@@ -280,9 +301,10 @@
                 </div>
             </section>
 
-            <section class="border-2 border-emerald-200 rounded-lg p-4 sm:p-5 bg-emerald-50/10 shadow-xs">
+            <!-- VERIFICATION BLOCK -->
+            <section data-block="verificationBlock" class="border-2 border-emerald-200 rounded-lg p-4 sm:p-5 bg-emerald-50/10 shadow-xs">
                 <div class="bg-emerald-800 text-white px-3 py-2 rounded font-bold text-xs sm:text-sm tracking-wider uppercase mb-4 shadow-sm">
-                    4. Property Details & Due Diligence
+                    4. Property Details &amp; Due Diligence
                 </div>
                 <div class="grid grid-cols-1 gap-4 mb-4">
                     <div>
@@ -294,27 +316,27 @@
                         <input type="text" id="propertySizeAndValue" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white">
                     </div>
                 </div>
-                
+
                 <div class="grid grid-cols-1 gap-4 mb-4">
                     <div>
                         <label class="block text-xs font-bold uppercase mb-1.5 text-emerald-950">Original Jamabandi Copy</label>
-                        <label class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-emerald-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase">[ CLICK TO UPLOAD ORIGINAL JAMABANDI ]</span>
-                            <input type="file" id="propertyJamabandiFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                        <label id="label_Original_Jamabandi" class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-emerald-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD ORIGINAL JAMABANDI ]</span>
+                            <input type="file" data-file-id="Original_Jamabandi" data-block-target="verificationBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                         </label>
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase mb-1.5 text-emerald-950">Copy of Registration Deed Ownership Proof</label>
-                        <label class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-emerald-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase">[ CLICK TO UPLOAD PREVIOUS DEED COPY ]</span>
-                            <input type="file" id="propertyPreviousDeedFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                        <label id="label_Previous_Registration_Deed" class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-emerald-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD PREVIOUS DEED COPY ]</span>
+                            <input type="file" data-file-id="Previous_Registration_Deed" data-block-target="verificationBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                         </label>
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase mb-1.5 text-emerald-950">Stamp Paper Value Collected Proof</label>
-                        <label class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-emerald-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase">[ CLICK TO UPLOAD STAMP PAPER SCAN ]</span>
-                            <input type="file" id="propertyStampPaperFile" accept="image/*,application/pdf" class="hidden" onchange="updateFileLabel(this)">
+                        <label id="label_Stamp_Paper_Proof_Scan" class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-emerald-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
+                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD STAMP PAPER SCAN ]</span>
+                            <input type="file" data-file-id="Stamp_Paper_Proof_Scan" data-block-target="verificationBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
                         </label>
                     </div>
                 </div>
@@ -324,9 +346,10 @@
                     <textarea id="propertyParagraphField" rows="4" class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500 bg-white" placeholder="Paste structural text details here..."></textarea>
                 </div>
 
+                <!-- B10: Checkbox is now validated in JS; `required` kept as UX hint only -->
                 <div class="p-3 sm:p-4 bg-amber-50 border-l-4 border-amber-500 rounded text-amber-900 text-sm shadow-xs">
                     <label class="flex items-start cursor-pointer select-none">
-                        <input type="checkbox" id="clearanceCheckpoint" required class="w-5 h-5 mt-0.5 mr-3 rounded text-amber-600 focus:ring-amber-500 shrink-0 cursor-pointer">
+                        <input type="checkbox" id="clearanceCheckpoint" class="w-5 h-5 mt-0.5 mr-3 rounded text-amber-600 focus:ring-amber-500 shrink-0 cursor-pointer">
                         <span class="text-xs sm:text-sm">
                             <strong>Non-Negotiable Clearance Checkpoint:</strong> I certify that a complete check on the property has been performed to make sure there is no existing lease, mortgage, pending cases, dispute, or objections.
                         </span>
@@ -335,169 +358,351 @@
             </section>
 
             <div class="pt-4 border-t border-slate-200">
-                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white h-12 rounded-xl font-bold uppercase text-sm tracking-wide shadow-md transition-colors border-b-4 border-amber-600 active:border-b-0 cursor-pointer">
-                    🔒 Securely Sync & Submit Log to Sheet
+                <button id="submitBtn" type="button" onclick="handleFormSubmit()" class="w-full bg-slate-900 hover:bg-slate-800 text-white h-12 rounded-xl font-bold uppercase text-sm tracking-wide shadow-md transition-colors border-b-4 border-amber-600 active:border-b-0 cursor-pointer">
+                    🔒 Securely Sync &amp; Submit Log to Sheet
                 </button>
             </div>
         </form>
     </div>
 
     <script>
-        // ▶ Replace this string target with your updated deployment macro endpoint URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby1etK5TiOPmw05Xo5AhzBA7pZeaAiREqPH-9LNP-VRRnC4t2uokEydSZO7VT-fNTes/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtulsM4Bg2pHvKOwl4a55jx21I5rbR5LprOvbP79Oy5xmK8ayRX0lPRJPWNraCE3LNAA/exec';
+        const MAX_FILE_MB       = 15; // A7: client-side file size limit in MB
 
-        function updateFileLabel(inputElement) {
-            if (inputElement.files && inputElement.files.length > 0) {
-                const fileName = inputElement.files[0].name;
-                const containerLabel = inputElement.closest('label');
-                containerLabel.className = "flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-solid border-emerald-500 rounded-xl bg-emerald-50/40 p-3 text-center";
-                containerLabel.innerHTML = `
-                    <span class="p-1.5 bg-emerald-100 rounded-full text-emerald-600 mb-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg></span>
-                    <span class="text-xs font-bold text-emerald-900 truncate max-w-[240px] block px-2">${fileName}</span>
-                    <span class="text-[9px] text-emerald-600 font-bold uppercase tracking-wider mt-0.5">✔ Document Ready</span>
-                    <input type="file" class="hidden" onchange="updateFileLabel(this)">
-                `;
+        /**
+         * A1/A2/A6 FIX: Central file store keyed by data-file-id.
+         * File objects are stored here, NEVER in the DOM input element.
+         * The input is only used to trigger the browser file picker.
+         */
+        const fileStore = {}; // { "Seller_Aadhaar_Card": File, ... }
+
+        /**
+         * A1/A6 FIX: handleFileChange replaces updateFileLabel.
+         * It stores the File in fileStore and updates the label UI separately,
+         * leaving the original <input> completely intact in the DOM.
+         * A7 FIX: Enforces 15 MB per-file size limit before storing.
+         */
+        function handleFileChange(inputEl) {
+            if (!inputEl.files || inputEl.files.length === 0) return;
+
+            const file    = inputEl.files[0];
+            const fileId  = inputEl.getAttribute('data-file-id');
+            const labelEl = document.getElementById('label_' + fileId);
+
+            if (!fileId || !labelEl) return;
+
+            // A7: File size guard
+            const fileMB = file.size / (1024 * 1024);
+            if (fileMB > MAX_FILE_MB) {
+                alert(`"${file.name}" is ${fileMB.toFixed(1)} MB. Maximum allowed size is ${MAX_FILE_MB} MB. Please compress or scan at lower resolution.`);
+                inputEl.value = ''; // reset the input
+                return;
             }
+
+            // Store the file object safely — DOM input NOT touched
+            fileStore[fileId] = file;
+
+            // Update label UI to show success state
+            // Find and update just the visible span elements, not replacing innerHTML
+            const spans = labelEl.querySelectorAll('span.pointer-events-none');
+            if (spans.length > 0) {
+                spans[0].textContent = '✔ ' + file.name;
+                spans[0].className   = 'text-xs font-bold text-emerald-900 truncate max-w-[240px] block px-2 pointer-events-none';
+                if (spans[1]) {
+                    spans[1].textContent = 'Document Ready — tap to change';
+                    spans[1].className   = 'text-[9px] text-emerald-600 font-bold uppercase tracking-wider mt-0.5 pointer-events-none';
+                }
+            }
+            labelEl.className = 'flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-solid border-emerald-500 rounded-xl bg-emerald-50/40 cursor-pointer p-3 text-center';
         }
 
+        // B7 FIX: Use onchange instead of onclick for radio buttons (already applied in HTML)
         function toggleProfileFields(party, profileType) {
             document.querySelectorAll(`[id^="${party}-"][id$="-fields"]`).forEach(el => el.classList.add('hidden'));
             document.getElementById(`${party}-${profileType}-fields`).classList.remove('hidden');
         }
 
+        // B2 FIX: Sale and Transfer deed types now have separate blocks
         function toggleDeedSections() {
             const selectedDeed = document.getElementById('deedType').value;
-            document.getElementById('deed-lease-block').classList.add('hidden');
-            document.getElementById('deed-modt-block').classList.add('hidden');
-            document.getElementById('deed-transfer-block').classList.add('hidden');
+            ['deed-lease-block', 'deed-modt-block', 'deed-sale-block', 'deed-transfer-block']
+                .forEach(id => document.getElementById(id).classList.add('hidden'));
+
             if (selectedDeed === 'lease') {
                 document.getElementById('deed-lease-block').classList.remove('hidden');
             } else if (selectedDeed === 'modt') {
                 document.getElementById('deed-modt-block').classList.remove('hidden');
-            } else if (selectedDeed === 'transfer' || selectedDeed === 'sale') {
+            } else if (selectedDeed === 'sale') {
+                document.getElementById('deed-sale-block').classList.remove('hidden');
+            } else if (selectedDeed === 'transfer') {
                 document.getElementById('deed-transfer-block').classList.remove('hidden');
             }
         }
 
         function getPartyName(partyType) {
-            const activeProfile = document.querySelector(`input[name="${partyType}Profile"]:checked`).value;
-            if (activeProfile === 'individual') {
-                return document.getElementById(`${partyType}IndividualName`).value.trim() || 'Individual';
-            } else if (activeProfile === 'bank') {
-                return document.getElementById(`${partyType}BankName`).value.trim() || 'Bank';
-            } else {
-                return document.getElementById(`${partyType}CompanyName`).value.trim() || 'Company';
-            }
+            const activeProfile = document.querySelector(`input[name="${partyType}Profile"]:checked`);
+            if (!activeProfile) return partyType === 'seller' ? 'Seller' : 'Buyer';
+            const pv = activeProfile.value;
+            if (pv === 'individual') return (document.getElementById(`${partyType}IndividualName`).value || '').trim() || 'Individual';
+            if (pv === 'bank')       return (document.getElementById(`${partyType}BankName`).value || '').trim() || 'Bank';
+            return (document.getElementById(`${partyType}CompanyName`).value || '').trim() || 'Company';
         }
 
+        // B8 FIX: convertFileToBase64 now includes per-file try/catch and returns null on failure
         function convertFileToBase64(file) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = error => reject(error);
+                reader.onload  = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = () => {
+                    console.error('FileReader error for:', file.name);
+                    resolve(null); // null signals a failed encode — handled in loop
+                };
             });
         }
 
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-
+        /**
+         * Returns all file input definitions that belong to currently VISIBLE sections.
+         * A4/B4 FIX: Checks the entire ancestor chain for hidden sections, not just
+         * the input element's own class. Also filters by active profile block and
+         * active deed conditional block.
+         */
+        function getVisibleFileInputs() {
             const form = document.getElementById('sopForm');
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const executiveName = (document.getElementById('assignedExecutiveField').value || '').trim() || 'Staff';
-            const deedType = document.getElementById('deedType').value;
-            const propertyParagraph = document.getElementById('propertyParagraphField').value;
-            const sellerName = getPartyName('seller');
-            const buyerName  = getPartyName('buyer');
+            return Array.from(form.querySelectorAll('input[type="file"][data-file-id]')).filter(input => {
+                // Walk up the DOM — if any ancestor (other than the input itself) has class 'hidden', skip
+                let el = input.parentElement;
+                while (el && el !== form) {
+                    if (el.classList.contains('hidden')) return false;
+                    el = el.parentElement;
+                }
+                return true;
+            });
+        }
+
+        // B15 FIX: Top-level try/catch wraps entire submit handler
+        async function handleFormSubmit() {
+            try {
+                await _doSubmit();
+            } catch (fatalErr) {
+                const form      = document.getElementById('sopForm');
+                const submitBtn = document.getElementById('submitBtn');
+                form.classList.remove('uploading');
+                submitBtn.disabled  = false;
+                submitBtn.innerText = '🔒 Securely Sync & Submit Log to Sheet';
+                alert('Unexpected error: ' + fatalErr.message);
+            }
+        }
+
+        async function _doSubmit() {
+            const form      = document.getElementById('sopForm');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // B10 FIX: Manual validation since preventDefault suppresses native form validation
+            const staffName = (document.getElementById('assignedExecutiveField').value || '').trim();
+            if (!staffName) {
+                alert('Please enter the Assigned Executive (Staff Name) before submitting.');
+                document.getElementById('assignedExecutiveField').focus();
+                return;
+            }
+
+            const clearance = document.getElementById('clearanceCheckpoint');
+            if (!clearance.checked) {
+                alert('Please tick the Non-Negotiable Clearance Checkpoint before submitting.');
+                clearance.focus();
+                return;
+            }
+
+            // B9 FIX: Safe deedType read with fallback
+            const deedTypeEl = document.getElementById('deedType');
+            const deedType   = (deedTypeEl && deedTypeEl.value) ? deedTypeEl.value : 'sale';
+
+            const propertyAddress    = (document.getElementById('propertyAddress').value    || '').trim();
+            const propertySizeValue  = (document.getElementById('propertySizeAndValue').value || '').trim();
+            const propertyParagraph  = (document.getElementById('propertyParagraphField').value || '').trim();
+            const sellerName         = getPartyName('seller');
+            const buyerName          = getPartyName('buyer');
 
             form.classList.add('uploading');
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Collecting & Encoding All Files...';
+            submitBtn.disabled  = true;
+            submitBtn.innerText = 'Assembling Multi-Segment Architecture...';
 
-            // Flat Form Data Structure updated key mapping target
-            const formData = {
-                staffName: executiveName, // <--- CHANGED: clientName is now staffName
-                sellerFullName: sellerName,
-                buyerFullName: buyerName,
-                deedType: deedType,
-                propertyParagraph: propertyParagraph
+            // B1 FIX: deedType consistently uppercased at one place only
+            const payload = {
+                meta_deedType:           deedType.toUpperCase(),
+                meta_sellerName:         sellerName,
+                meta_buyerName:          buyerName,
+                meta_propertyAddress:    propertyAddress,
+                meta_propertySizeValue:  propertySizeValue,
+                meta_propertyParagraph:  propertyParagraph,
+
+                intakeBlock:       {},
+                sellerBlock:       {},
+                buyerBlock:        {},
+                witnessBlock:      {},
+                verificationBlock: {}
             };
 
+            const dropDuplicates = [
+                'assignedExecutiveField', 'deedType', 'propertyAddress',
+                'propertySizeAndValue', 'propertyParagraphField'
+            ];
+
+            // A4/B3 FIX: Only collect text fields from VISIBLE sections (not hidden profile/deed blocks)
             form.querySelectorAll('input:not([type="file"]):not([type="radio"]):not([type="checkbox"]), select, textarea').forEach(el => {
                 const key = el.id || el.name;
-                if (key) formData[key] = el.value || '';
+                if (!key || el.value.trim() === '' || dropDuplicates.includes(key)) return;
+
+                // B3/A4 FIX: Skip if any ancestor is hidden
+                let ancestor = el.parentElement;
+                let isHidden = false;
+                while (ancestor && ancestor !== form) {
+                    if (ancestor.classList.contains('hidden')) { isHidden = true; break; }
+                    ancestor = ancestor.parentElement;
+                }
+                if (isHidden) return;
+
+                const container = el.closest('[data-block]') || el.closest('section');
+                const blockKey  = container ? container.getAttribute('data-block') : null;
+                if (blockKey && payload[blockKey]) {
+                    // B14: Sanitise value — strip null bytes only; JSON.stringify handles rest
+                    payload[blockKey][key] = el.value.trim().replace(/\0/g, '');
+                }
             });
+
+            // Collect only checked radios from visible sections
             form.querySelectorAll('input[type="radio"]:checked').forEach(el => {
-                if (el.name) formData[el.name] = el.value || '';
-            });
-            form.querySelectorAll('input[type="checkbox"]').forEach(el => {
-                const key = el.id || el.name;
-                if (key) formData[key] = el.checked ? (el.value || 'Yes') : '';
+                if (!el.name || !el.value.trim()) return;
+                let ancestor = el.parentElement;
+                let isHidden = false;
+                while (ancestor && ancestor !== form) {
+                    if (ancestor.classList.contains('hidden')) { isHidden = true; break; }
+                    ancestor = ancestor.parentElement;
+                }
+                if (isHidden) return;
+                const container = el.closest('[data-block]') || el.closest('section');
+                const blockKey  = container ? container.getAttribute('data-block') : null;
+                if (blockKey && payload[blockKey]) {
+                    payload[blockKey][el.name] = el.value.trim();
+                }
             });
 
-            const allFileInputs = Array.from(form.querySelectorAll('input[type="file"]')).filter(input => {
-                return input.closest('.hidden') === null && input.files && input.files.length > 0;
+            // Checkbox — write human-readable label (A5/B5 FIX)
+            if (clearance.checked) {
+                payload.verificationBlock['Clearance Checkpoint'] = 'Passed — No encumbrances confirmed';
+            }
+
+            // Anchor operational routing values
+            payload.intakeBlock['staffName'] = staffName;
+            payload.intakeBlock['deedType']  = deedType.toUpperCase();
+
+            // A2/A3 FIX: Stamp Yes/No for ALL visible file slots BEFORE encoding
+            // Uses getVisibleFileInputs() so hidden-profile and hidden-deed file inputs are excluded (B4 FIX)
+            const visibleFileInputs = getVisibleFileInputs();
+            const allFileIds        = visibleFileInputs.map(inp => inp.getAttribute('data-file-id'));
+
+            allFileIds.forEach(fileId => {
+                const inp       = visibleFileInputs.find(i => i.getAttribute('data-file-id') === fileId);
+                const hostBlock = inp.getAttribute('data-block-target') || 'verificationBlock';
+                const labelText = fileId.replace(/_/g, ' ');
+                if (payload[hostBlock]) {
+                    // Yes if file is in store, No if not provided
+                    payload[hostBlock][labelText] = fileStore[fileId] ? 'Yes' : 'No';
+                }
             });
 
+            // Encode only files that were actually selected
+            submitBtn.innerText = 'Encoding file attachments...';
             const filesArray = [];
-            for (let i = 0; i < allFileInputs.length; i++) {
-                const input = allFileInputs[i];
-                const file = input.files[0];
-                submitBtn.innerText = `Encoding File ${i + 1} of ${allFileInputs.length}...`;
+            let encodeIndex  = 0;
 
-                let labelText = 'Document';
-                const wrapperDiv = input.closest('div');
-                if (wrapperDiv && wrapperDiv.querySelector('label:not(.cursor-pointer)')) {
-                    labelText = wrapperDiv.querySelector('label:not(.cursor-pointer)').innerText.trim();
-                } else {
-                    const sectionHeader = input.closest('section') ? input.closest('section').querySelector('div') : null;
-                    labelText = sectionHeader ? sectionHeader.innerText.trim() : 'File';
+            for (const fileId of allFileIds) {
+                const file = fileStore[fileId];
+                if (!file) continue; // not provided — already stamped "No" above
+
+                encodeIndex++;
+                submitBtn.innerText = `Encoding File ${encodeIndex} of ${Object.keys(fileStore).length}...`;
+
+                const inp       = visibleFileInputs.find(i => i.getAttribute('data-file-id') === fileId);
+                const hostBlock = inp.getAttribute('data-block-target') || 'verificationBlock';
+                const labelText = fileId.replace(/_/g, ' ');
+
+                // B8 FIX: convertFileToBase64 returns null on error; handle per-file
+                const base64Data = await convertFileToBase64(file);
+                if (!base64Data) {
+                    // Mark as failed in block
+                    if (payload[hostBlock]) payload[hostBlock][labelText] = 'Encode Failed';
+                    continue;
                 }
 
-                const base64Data = await convertFileToBase64(file);
                 filesArray.push({
-                    fieldLabel: labelText,
-                    fileName: file.name,
-                    mimeType: file.type || 'application/octet-stream',
-                    fileData: base64Data
+                    blockTarget: hostBlock,
+                    fieldLabel:  labelText,
+                    fileName:    file.name,
+                    mimeType:    file.type || 'application/octet-stream',
+                    fileData:    base64Data
                 });
             }
 
-            formData.files = filesArray;
+            payload.files = filesArray;
 
-            submitBtn.innerText = 'Syncing to Google Sheet...';
+            submitBtn.innerText = 'Syncing Data to Sheet...';
+
+            // B5 FIX: AbortController with 5-minute timeout to prevent infinite lock
+            const controller = new AbortController();
+            const timeoutId  = setTimeout(() => controller.abort(), 5 * 60 * 1000);
+
             try {
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
+                    method:  'POST',
                     headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(formData)
+                    body:    JSON.stringify(payload),
+                    signal:  controller.signal
                 });
+                clearTimeout(timeoutId);
 
                 const text = await response.text();
                 let result;
-                try { result = JSON.parse(text); } catch(e) { throw new Error('Server response: ' + text); }
+                try   { result = JSON.parse(text); }
+                catch { throw new Error('Unexpected server response: ' + text.substring(0, 200)); }
 
                 form.classList.remove('uploading');
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Securely Sync & Submit Log to Sheet';
+                submitBtn.disabled  = false;
+                submitBtn.innerText = '🔒 Securely Sync & Submit Log to Sheet';
 
                 if (result.status === 'success') {
-                    alert('Submission Complete!\nOne row added to Google Sheet.\n' + result.filesUploaded + ' file(s) uploaded to Drive folder:\n' + result.folderName);
+                    // D9: Show folder link in success message if returned
+                    let msg = `Submission Complete!\n\nCase ID: ${result.uniqueId}\nFolder: ${result.folderName}`;
+                    if (result.folderUrl) {
+                        msg += `\n\nDrive Folder: ${result.folderUrl}`;
+                    }
+                    if (result.fileErrors && result.fileErrors.length > 0) {
+                        msg += `\n\n⚠ Some files had upload errors:\n${result.fileErrors.join('\n')}`;
+                    }
+                    alert(msg);
                     window.location.reload();
                 } else {
-                    alert('Error: ' + (result.message || 'Unknown server error.'));
+                    alert('Server Error: ' + (result.message || 'Unknown error. Please try again.'));
                 }
+
             } catch (err) {
+                clearTimeout(timeoutId);
                 form.classList.remove('uploading');
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Securely Sync & Submit Log to Sheet';
-                alert('Submission failed: ' + err.message);
+                submitBtn.disabled  = false;
+                submitBtn.innerText = '🔒 Securely Sync & Submit Log to Sheet';
+
+                if (err.name === 'AbortError') {
+                    alert('Submission timed out after 5 minutes. Please check your internet connection and try again. Your form data is still filled in.');
+                } else {
+                    alert('Submission failed: ' + err.message + '\n\nYour form data is still filled in — please try again.');
+                }
             }
         }
 
-        window.onload = function() {
+        // B12 FIX: Use addEventListener instead of window.onload assignment
+        window.addEventListener('load', function () {
             toggleDeedSections();
-        };
+        });
     </script>
 </body>
 </html>
