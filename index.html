@@ -35,6 +35,8 @@
 
         <!-- B10: Removed onsubmit from form tag; validation + submit handled entirely in JS -->
         <form id="sopForm" class="bg-white p-4 sm:p-6 rounded-b-xl shadow-md space-y-6 sm:space-y-8">
+            <div id="errorSummary" class="hidden mb-3 p-3 rounded border border-red-300 bg-red-50 text-red-800 text-xs sm:text-sm font-medium"></div>
+
 
             <!-- INTAKE BLOCK -->
             <div data-block="intakeBlock" class="bg-slate-50 p-4 rounded-lg border-2 border-slate-300 shadow-sm space-y-4">
@@ -76,8 +78,9 @@
                                 <label class="block text-xs font-bold text-blue-900 uppercase mb-2">Bank Sanction Letter Copy</label>
                                 <!-- A1/A2 FIX: file input now has data-file-id and is managed via fileStore, NOT via innerHTML replacement -->
                                 <label id="label_Bank_Sanction_Letter" class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-blue-400 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                    <span class="text-xs font-black text-blue-900 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD SANCTION LETTER ]</span>
-                                    <input type="file" data-file-id="Bank_Sanction_Letter" data-block-target="intakeBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                    <span class="text-xs font-black text-blue-900 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD SANCTION LETTER * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                    <input type="file" data-file-id="Bank_Sanction_Letter" data-block-target="intakeBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                                 </label>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -117,72 +120,78 @@
                 </div>
 
                 <div id="seller-individual-fields" class="profile-block space-y-4">
-                    <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Seller Full Name</label><input type="text" id="sellerIndividualName" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                    <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Seller Full Name *</label><input type="text" id="sellerIndividualName" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Seller Aadhaar Card Copy</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Seller Aadhaar Card Copy *</label>
                             <label id="label_Seller_Aadhaar_Card" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AADHAAR CARD ]</span>
-                                <input type="file" data-file-id="Seller_Aadhaar_Card" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AADHAAR CARD * * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Seller_Aadhaar_Card" data-block-target="sellerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Seller PAN Card Copy</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Seller PAN Card Copy *</label>
                             <label id="label_Seller_PAN_Card" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD PAN CARD ]</span>
-                                <input type="file" data-file-id="Seller_PAN_Card" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD PAN CARD * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Seller_PAN_Card" data-block-target="sellerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
-                    <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Seller Mobile Number</label><input type="tel" id="sellerIndividualMobile" class="w-full sm:max-w-xs border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                    <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Seller Mobile Number *</label><input type="tel" id="sellerIndividualMobile" class="w-full sm:max-w-xs border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                 </div>
 
                 <div id="seller-bank-fields" class="profile-block hidden space-y-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Bank Name</label><input type="text" id="sellerBankName" placeholder="e.g., State Bank of India" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
-                        <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Branch Office Address</label><input type="text" id="sellerBankBranch" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                        <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Bank Name *</label><input type="text" id="sellerBankName" placeholder="e.g., State Bank of India" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                        <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Branch Office Address *</label><input type="text" id="sellerBankBranch" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Bank Employee ID Card Copy</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Bank Employee ID Card Copy *</label>
                             <label id="label_Seller_Bank_Employee_ID" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD EMPLOYEE ID ]</span>
-                                <input type="file" data-file-id="Seller_Bank_Employee_ID" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD EMPLOYEE ID * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Seller_Bank_Employee_ID" data-block-target="sellerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Power of Attorney (PoA)</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Power of Attorney (PoA) *</label>
                             <label id="label_Seller_Power_of_Attorney" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD POA DOCUMENT ]</span>
-                                <input type="file" data-file-id="Seller_Power_of_Attorney" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD POA DOCUMENT * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Seller_Power_of_Attorney" data-block-target="sellerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
-                    <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Official Mobile Number</label><input type="tel" id="sellerBankMobile" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                    <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Official Mobile Number *</label><input type="tel" id="sellerBankMobile" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                 </div>
 
                 <div id="seller-company-fields" class="profile-block hidden space-y-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Company Name</label><input type="text" id="sellerCompanyName" placeholder="e.g., Reliance Jio" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
-                        <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Registered Corporate Address</label><input type="text" id="sellerCompanyAddress" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                        <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Company Name *</label><input type="text" id="sellerCompanyName" placeholder="e.g., Reliance Jio" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                        <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Registered Corporate Address *</label><input type="text" id="sellerCompanyAddress" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Authorised Representative ID / Aadhaar</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Authorised Representative ID / Aadhaar *</label>
                             <label id="label_Seller_Representative_ID" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AUTH ID COPY ]</span>
-                                <input type="file" data-file-id="Seller_Representative_ID" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AUTH ID COPY * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Seller_Representative_ID" data-block-target="sellerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Board Resolution or PoA</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-purple-950">Board Resolution or PoA *</label>
                             <label id="label_Seller_Board_Resolution" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-purple-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD RESOLUTION / POA ]</span>
-                                <input type="file" data-file-id="Seller_Board_Resolution" data-block-target="sellerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-purple-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD RESOLUTION / POA * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Seller_Board_Resolution" data-block-target="sellerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
-                    <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Mobile Number</label><input type="tel" id="sellerCompanyMobile" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                    <div><label class="block text-xs font-bold uppercase mb-1 text-purple-950">Mobile Number *</label><input type="tel" id="sellerCompanyMobile" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                 </div>
             </section>
 
@@ -201,72 +210,78 @@
                 </div>
 
                 <div id="buyer-individual-fields" class="profile-block space-y-4">
-                    <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Buyer Full Name</label><input type="text" id="buyerIndividualName" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                    <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Buyer Full Name *</label><input type="text" id="buyerIndividualName" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Buyer Aadhaar Card Copy</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Buyer Aadhaar Card Copy *</label>
                             <label id="label_Buyer_Aadhaar_Card" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AADHAAR CARD ]</span>
-                                <input type="file" data-file-id="Buyer_Aadhaar_Card" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AADHAAR CARD * * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Buyer_Aadhaar_Card" data-block-target="buyerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Buyer PAN Card Copy</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Buyer PAN Card Copy *</label>
                             <label id="label_Buyer_PAN_Card" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD PAN CARD ]</span>
-                                <input type="file" data-file-id="Buyer_PAN_Card" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD PAN CARD * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Buyer_PAN_Card" data-block-target="buyerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
-                    <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Buyer Mobile Number</label><input type="tel" id="buyerIndividualMobile" class="w-full sm:max-w-xs border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                    <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Buyer Mobile Number *</label><input type="tel" id="buyerIndividualMobile" class="w-full sm:max-w-xs border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                 </div>
 
                 <div id="buyer-bank-fields" class="profile-block hidden space-y-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Bank Name</label><input type="text" id="buyerBankName" placeholder="e.g., HDFC Bank" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
-                        <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Branch Office Address</label><input type="text" id="buyerBankBranch" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                        <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Bank Name *</label><input type="text" id="buyerBankName" placeholder="e.g., HDFC Bank" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                        <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Branch Office Address *</label><input type="text" id="buyerBankBranch" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Bank Employee ID Card Copy</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Bank Employee ID Card Copy *</label>
                             <label id="label_Buyer_Bank_Employee_ID" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD EMPLOYEE ID ]</span>
-                                <input type="file" data-file-id="Buyer_Bank_Employee_ID" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD EMPLOYEE ID * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Buyer_Bank_Employee_ID" data-block-target="buyerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Power of Attorney (PoA)</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Power of Attorney (PoA) *</label>
                             <label id="label_Buyer_Power_of_Attorney" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD POA DOCUMENT ]</span>
-                                <input type="file" data-file-id="Buyer_Power_of_Attorney" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD POA DOCUMENT * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Buyer_Power_of_Attorney" data-block-target="buyerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
-                    <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Official Mobile Number</label><input type="tel" id="buyerBankMobile" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                    <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Official Mobile Number *</label><input type="tel" id="buyerBankMobile" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                 </div>
 
                 <div id="buyer-company-fields" class="profile-block hidden space-y-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Company Name</label><input type="text" id="buyerCompanyName" placeholder="e.g., Tata Motors" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
-                        <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Registered Corporate Address</label><input type="text" id="buyerCompanyAddress" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                        <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Company Name *</label><input type="text" id="buyerCompanyName" placeholder="e.g., Tata Motors" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                        <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Registered Corporate Address *</label><input type="text" id="buyerCompanyAddress" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Authorised Representative ID / Aadhaar</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Authorised Representative ID / Aadhaar *</label>
                             <label id="label_Buyer_Representative_ID" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AUTH ID COPY ]</span>
-                                <input type="file" data-file-id="Buyer_Representative_ID" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD AUTH ID COPY * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Buyer_Representative_ID" data-block-target="buyerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Board Resolution or PoA</label>
+                            <label class="block text-xs font-bold uppercase mb-2 text-teal-950">Board Resolution or PoA *</label>
                             <label id="label_Buyer_Board_Resolution" class="flex flex-col items-center justify-center w-full min-h-[105px] border-2 border-dashed border-teal-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD RESOLUTION / POA ]</span>
-                                <input type="file" data-file-id="Buyer_Board_Resolution" data-block-target="buyerBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <span class="text-xs font-black text-teal-950 tracking-wide uppercase pointer-events-none">[ CLICK TO UPLOAD RESOLUTION / POA * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
+                                <input type="file" data-file-id="Buyer_Board_Resolution" data-block-target="buyerBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
                     </div>
-                    <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Mobile Number</label><input type="tel" id="buyerCompanyMobile" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
+                    <div><label class="block text-xs font-bold uppercase mb-1 text-teal-950">Mobile Number *</label><input type="tel" id="buyerCompanyMobile" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white"></div>
                 </div>
             </section>
 
@@ -280,23 +295,25 @@
                         <span class="text-xs font-bold text-blue-700 uppercase block">Witness 1: Personal Witness</span>
                         <div>
                             <label id="label_Witness_1_Aadhaar" class="flex flex-col items-center justify-center w-full min-h-[95px] border-2 border-dashed border-blue-300 rounded-xl bg-blue-50/20 cursor-pointer p-2 text-center">
-                                <span class="text-[11px] font-black text-blue-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD AADHAAR CARD ]</span>
+                                <span class="text-[11px] font-black text-blue-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD AADHAAR CARD * * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
                                 <span class="text-[9px] text-slate-500 font-medium pointer-events-none">Front &amp; Back Combined Copy</span>
-                                <input type="file" data-file-id="Witness_1_Aadhaar" data-block-target="witnessBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <input type="file" data-file-id="Witness_1_Aadhaar" data-block-target="witnessBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
-                        <div><label class="block text-xxs font-bold text-slate-500 uppercase">Mobile Number</label><input type="tel" id="witness1Mobile" class="w-full border border-slate-300 rounded h-11 px-2 text-sm mt-1"></div>
+                        <div><label class="block text-xxs font-bold text-slate-500 uppercase">Mobile Number *</label><input type="tel" id="witness1Mobile" class="w-full border border-slate-300 rounded h-11 px-2 text-sm mt-1"></div>
                     </div>
                     <div class="p-3 bg-white rounded-xl border border-blue-200 shadow-xs space-y-3">
                         <span class="text-xs font-bold text-blue-700 uppercase block">Witness 2: Govt Approved Witness</span>
                         <div>
                             <label id="label_Witness_2_Govt_ID" class="flex flex-col items-center justify-center w-full min-h-[95px] border-2 border-dashed border-blue-300 rounded-xl bg-blue-50/20 cursor-pointer p-2 text-center">
-                                <span class="text-[11px] font-black text-blue-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD GOVT APPROVED ID ]</span>
+                                <span class="text-[11px] font-black text-blue-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD GOVT APPROVED ID * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 475 KB</span>
                                 <span class="text-[9px] text-slate-500 font-medium pointer-events-none">Numberdaar / Advocate / MC</span>
-                                <input type="file" data-file-id="Witness_2_Govt_ID" data-block-target="witnessBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                                <input type="file" data-file-id="Witness_2_Govt_ID" data-block-target="witnessBlock" accept="application/pdf" data-max-kb="475" class="hidden" onchange="handleFileChange(this)">
                             </label>
                         </div>
-                        <div><label class="block text-xxs font-bold text-slate-500 uppercase">Mobile Number</label><input type="tel" id="witness2Mobile" class="w-full border border-slate-300 rounded h-11 px-2 text-sm mt-1"></div>
+                        <div><label class="block text-xxs font-bold text-slate-500 uppercase">Mobile Number *</label><input type="tel" id="witness2Mobile" class="w-full border border-slate-300 rounded h-11 px-2 text-sm mt-1"></div>
                     </div>
                 </div>
             </section>
@@ -308,41 +325,44 @@
                 </div>
                 <div class="grid grid-cols-1 gap-4 mb-4">
                     <div>
-                        <label class="block text-xs font-bold uppercase mb-1 text-emerald-950">Property Address</label>
+                        <label class="block text-xs font-bold uppercase mb-1 text-emerald-950">Property Address *</label>
                         <input type="text" id="propertyAddress" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase mb-1 text-emerald-950">Property Size and Value</label>
+                        <label class="block text-xs font-bold uppercase mb-1 text-emerald-950">Property Size and Value *</label>
                         <input type="text" id="propertySizeAndValue" class="w-full border border-slate-300 rounded h-11 px-3 text-sm bg-white">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 gap-4 mb-4">
                     <div>
-                        <label class="block text-xs font-bold uppercase mb-1.5 text-emerald-950">Original Jamabandi Copy</label>
+                        <label class="block text-xs font-bold uppercase mb-1.5 text-emerald-950">Original Jamabandi Copy *</label>
                         <label id="label_Original_Jamabandi" class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-emerald-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD ORIGINAL JAMABANDI ]</span>
-                            <input type="file" data-file-id="Original_Jamabandi" data-block-target="verificationBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD ORIGINAL JAMABANDI * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 500 KB</span>
+                            <input type="file" data-file-id="Original_Jamabandi" data-block-target="verificationBlock" accept="application/pdf" data-max-kb="500" class="hidden" onchange="handleFileChange(this)">
                         </label>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase mb-1.5 text-emerald-950">Copy of Registration Deed Ownership Proof</label>
+                        <label class="block text-xs font-bold uppercase mb-1.5 text-emerald-950">Copy of Registration Deed Ownership Proof *</label>
                         <label id="label_Previous_Registration_Deed" class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-emerald-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD PREVIOUS DEED COPY ]</span>
-                            <input type="file" data-file-id="Previous_Registration_Deed" data-block-target="verificationBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD PREVIOUS DEED COPY * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 10 MB</span>
+                            <input type="file" data-file-id="Previous_Registration_Deed" data-block-target="verificationBlock" accept="application/pdf" data-max-kb="10240" class="hidden" onchange="handleFileChange(this)">
                         </label>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase mb-1.5 text-emerald-950">Stamp Paper Value Collected Proof</label>
+                        <label class="block text-xs font-bold uppercase mb-1.5 text-emerald-950">Stamp Paper Value Collected Proof *</label>
                         <label id="label_Stamp_Paper_Proof_Scan" class="flex flex-col items-center justify-center w-full min-h-[100px] border-2 border-dashed border-emerald-300 rounded-xl bg-white cursor-pointer p-3 text-center shadow-xs">
-                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD STAMP PAPER SCAN ]</span>
-                            <input type="file" data-file-id="Stamp_Paper_Proof_Scan" data-block-target="verificationBlock" accept="image/*,application/pdf" class="hidden" onchange="handleFileChange(this)">
+                            <span class="text-xs font-black text-emerald-950 tracking-wider uppercase pointer-events-none">[ CLICK TO UPLOAD STAMP PAPER SCAN * ]</span>
+                                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5 pointer-events-none">PDF Only · Max 500 KB</span>
+                            <input type="file" data-file-id="Stamp_Paper_Proof_Scan" data-block-target="verificationBlock" accept="application/pdf" data-max-kb="500" class="hidden" onchange="handleFileChange(this)">
                         </label>
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <label class="block text-xs font-bold uppercase mb-1 text-emerald-950">Property Paragraph with details taken from Jamabandi</label>
+                    <label class="block text-xs font-bold uppercase mb-1 text-emerald-950">Property Paragraph with details taken from Jamabandi *</label>
                     <textarea id="propertyParagraphField" rows="4" class="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500 bg-white" placeholder="Paste structural text details here..."></textarea>
                 </div>
 
@@ -391,19 +411,30 @@
 
             if (!fileId || !labelEl) return;
 
-            // A7: File size guard
-            const fileMB = file.size / (1024 * 1024);
-            if (fileMB > MAX_FILE_MB) {
-                alert(`"${file.name}" is ${fileMB.toFixed(1)} MB. Maximum allowed size is ${MAX_FILE_MB} MB. Please compress or scan at lower resolution.`);
-                inputEl.value = ''; // reset the input
+            if (file.type !== 'application/pdf') {
+                alert('"' + file.name + '" is not a PDF file.\nOnly PDF documents are accepted for this field.\nPlease convert your document to PDF and try again.');
+                inputEl.value = '';
                 return;
             }
 
-            // Store the file object safely — DOM input NOT touched
+            const maxKb  = parseInt(inputEl.getAttribute('data-max-kb') || '0', 10);
+            const fileKB = file.size / 1024;
+            const fileMB = file.size / (1024 * 1024);
+
+            if (maxKb > 0) {
+                if (fileKB > maxKb) {
+                    alert('"' + file.name + '" is ' + fileKB.toFixed(0) + ' KB.\nMaximum allowed size for this field is ' + maxKb + ' KB.\nPlease compress your PDF and try again.');
+                    inputEl.value = '';
+                    return;
+                }
+            } else if (fileMB > MAX_FILE_MB) {
+                alert('"' + file.name + '" is ' + fileMB.toFixed(1) + ' MB. Maximum allowed size is ' + MAX_FILE_MB + ' MB. Please compress or scan at lower resolution.');
+                inputEl.value = '';
+                return;
+            }
+
             fileStore[fileId] = file;
 
-            // Update label UI to show success state
-            // Find and update just the visible span elements, not replacing innerHTML
             const spans = labelEl.querySelectorAll('span.pointer-events-none');
             if (spans.length > 0) {
                 spans[0].textContent = '✔ ' + file.name;
@@ -500,16 +531,131 @@
 
             // B10 FIX: Manual validation since preventDefault suppresses native form validation
             const staffName = (document.getElementById('assignedExecutiveField').value || '').trim();
-            if (!staffName) {
-                alert('Please enter the Assigned Executive (Staff Name) before submitting.');
-                document.getElementById('assignedExecutiveField').focus();
-                return;
+            const clearance = document.getElementById('clearanceCheckpoint');
+
+            const errorSummaryBox = document.getElementById('errorSummary');
+            if (errorSummaryBox) {
+                errorSummaryBox.classList.add('hidden');
+                errorSummaryBox.innerHTML = '';
             }
 
-            const clearance = document.getElementById('clearanceCheckpoint');
+            const missingItems = [];
+
+            if (!staffName) {
+                missingItems.push({ label: 'Assigned Executive (Staff Name)', targetId: 'assignedExecutiveField' });
+            }
             if (!clearance.checked) {
-                alert('Please tick the Non-Negotiable Clearance Checkpoint before submitting.');
-                clearance.focus();
+                missingItems.push({ label: 'Non-Negotiable Clearance Checkpoint', targetId: 'clearanceCheckpoint' });
+            }
+
+            // STRICT MANDATORY CHECKS FOR VISIBLE FIELDS
+
+            const dropDuplicates = [
+                'assignedExecutiveField', 'deedType', 'propertyAddress',
+                'propertySizeAndValue', 'propertyParagraphField'
+            ];
+
+            // 1) Collect labels for all visible non-file inputs (text, number, date, select, textarea) that are empty
+            form.querySelectorAll('input:not([type="file"]):not([type="radio"]):not([type="checkbox"]), select, textarea').forEach(el => {
+                const key = el.id || el.name;
+                if (!key || dropDuplicates.includes(key)) return;
+
+                // Skip hidden ancestors
+                let ancestor = el.parentElement;
+                let isHidden = false;
+                while (ancestor && ancestor !== form) {
+                    if (ancestor.classList.contains('hidden')) { isHidden = true; break; }
+                    ancestor = ancestor.parentElement;
+                }
+                if (isHidden) return;
+
+                const value = (el.value || '').trim();
+                if (!value) {
+                    let labelText = 'Field';
+                    let targetId  = el.id || '';
+
+                    // Special cases for witness mobile numbers
+                    if (key === 'witness1Mobile') {
+                        labelText = 'Witness 1 Mobile Number *';
+                    } else if (key === 'witness2Mobile') {
+                        labelText = 'Witness 2 Mobile Number *';
+                    } else {
+                        const containerDiv   = el.closest('div');
+                        const containerLabel = containerDiv && containerDiv.querySelector('label');
+                        if (containerLabel && containerLabel.textContent) {
+                            labelText = containerLabel.textContent.trim();
+                        }
+                    }
+
+                    if (!missingItems.some(it => it.label === labelText && it.targetId === targetId)) {
+                        missingItems.push({ label: labelText, targetId });
+                    }
+                }
+            });
+
+            // 2) All visible file inputs must have an uploaded PDF in fileStore
+            const visibleMandatoryFiles = getVisibleFileInputs();
+            visibleMandatoryFiles.forEach(inp => {
+                const fileId = inp.getAttribute('data-file-id');
+                if (!fileStore[fileId]) {
+                    const labelId = 'label_' + fileId;
+                    const labelEl = document.getElementById(labelId);
+                    let docName;
+
+                    // Map specific IDs to clearer names
+                    if (fileId === 'Seller_Aadhaar_Card')       docName = 'Seller Aadhaar Card PDF *';
+                    else if (fileId === 'Seller_PAN_Card')     docName = 'Seller PAN Card PDF *';
+                    else if (fileId === 'Buyer_Aadhaar_Card')  docName = 'Buyer Aadhaar Card PDF *';
+                    else if (fileId === 'Buyer_PAN_Card')      docName = 'Buyer PAN Card PDF *';
+                    else if (fileId === 'Witness_1_Aadhaar')   docName = 'Witness 1 Aadhaar Card PDF *';
+                    else if (fileId === 'Witness_2_Govt_ID')   docName = 'Witness 2 Govt ID PDF *';
+                    else if (fileId === 'Original_Jamabandi')  docName = 'Original Jamabandi Copy PDF *';
+                    else if (fileId === 'Previous_Registration_Deed') docName = 'Previous Registration Deed Copy PDF *';
+                    else if (fileId === 'Stamp_Paper_Proof_Scan')    docName = 'Stamp Paper Value Proof Scan PDF *';
+                    else {
+                        docName = 'Document';
+                        if (labelEl) {
+                            const span = labelEl.querySelector('span.pointer-events-none');
+                            if (span && span.textContent) {
+                                docName = span.textContent.replace(/\[/g, '').replace(/\]/g, '').trim();
+                            }
+                        }
+                    }
+
+                    if (!missingItems.some(it => it.label === docName && it.targetId === labelId)) {
+                        missingItems.push({ label: docName, targetId: labelId });
+                    }
+                }
+            });
+
+            if (missingItems.length > 0) {
+                if (errorSummaryBox) {
+                    const listHtml = missingItems.map((item, idx) => {
+                        const safeId = item.targetId ? item.targetId : '';
+                        return '<button type="button" data-target-id="' + safeId + '" class="mr-2 mb-1 inline-flex items-center px-2 py-1 rounded bg-red-100 text-red-800 text-[11px] sm:text-xs hover:bg-red-200">' +
+                               (idx + 1) + '. ' + item.label + '</button>';
+                    }).join(' ');
+                    errorSummaryBox.innerHTML = 'Data is not complete. Please complete:<br>' + listHtml;
+                    errorSummaryBox.classList.remove('hidden');
+
+                    // Attach click handler to scroll to relevant field/label
+                    errorSummaryBox.querySelectorAll('button[data-target-id]').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const tid = btn.getAttribute('data-target-id');
+                            if (!tid) return;
+                            const targetEl = document.getElementById(tid);
+                            if (targetEl) {
+                                targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                if (targetEl.focus) targetEl.focus();
+                            }
+                        });
+                    });
+
+                    errorSummaryBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    const labelsOnly = missingItems.map(it => it.label);
+                    alert('Data is not complete. Please complete: ' + labelsOnly.join(', '));
+                }
                 return;
             }
 
@@ -542,11 +688,6 @@
                 witnessBlock:      {},
                 verificationBlock: {}
             };
-
-            const dropDuplicates = [
-                'assignedExecutiveField', 'deedType', 'propertyAddress',
-                'propertySizeAndValue', 'propertyParagraphField'
-            ];
 
             // A4/B3 FIX: Only collect text fields from VISIBLE sections (not hidden profile/deed blocks)
             form.querySelectorAll('input:not([type="file"]):not([type="radio"]):not([type="checkbox"]), select, textarea').forEach(el => {
