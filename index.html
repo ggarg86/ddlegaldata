@@ -628,6 +628,13 @@
                 }
             });
 
+            // Move Non-Negotiable Clearance Checkpoint to the end of the list
+            const clearanceIndex = missingItems.findIndex(it => it.targetId === 'clearanceCheckpoint');
+            if (clearanceIndex !== -1) {
+                const clearanceItem = missingItems.splice(clearanceIndex, 1)[0];
+                missingItems.push(clearanceItem);
+            }
+
             if (missingItems.length > 0) {
                 if (errorSummaryBox) {
                     const listHtml = missingItems.map((item, idx) => {
@@ -651,6 +658,7 @@
                         });
                     });
 
+                    // Only scroll to the top error summary, do not focus any field here
                     errorSummaryBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
                     const labelsOnly = missingItems.map(it => it.label);
