@@ -645,7 +645,7 @@
                     errorSummaryBox.innerHTML = 'Data is not complete. Please complete:<br>' + listHtml;
                     errorSummaryBox.classList.remove('hidden');
 
-                    // Attach click handler to scroll to relevant field/label
+                    // Attach click handler to scroll to relevant field/label (only on user click)
                     errorSummaryBox.querySelectorAll('button[data-target-id]').forEach(btn => {
                         btn.addEventListener('click', () => {
                             const tid = btn.getAttribute('data-target-id');
@@ -653,12 +653,14 @@
                             const targetEl = document.getElementById(tid);
                             if (targetEl) {
                                 targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                if (targetEl.focus) targetEl.focus();
+                                if (typeof targetEl.focus === 'function') {
+                                    targetEl.focus();
+                                }
                             }
                         });
                     });
 
-                    // Only scroll to the top error summary, do not focus any field here
+                    // Scroll only to the error summary; do not focus any individual field during validation
                     errorSummaryBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
                     const labelsOnly = missingItems.map(it => it.label);
