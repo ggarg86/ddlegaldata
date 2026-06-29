@@ -890,11 +890,11 @@ body.uploading .submit-btn { opacity: 0.7; }
           <span class="field-err-msg" id="err-file-Previous_Registration_Deed">⚠ PDF required</span>
         </div>
         <div class="field">
-          <label class="field-label">Stamp Paper Scan Proof (PDF) <span class="req">*</span></label>
+          <label class="field-label" id="label-stamp-paper-heading">Stamp Paper Scan Proof (PDF) <span class="req" id="stamp-paper-req-star">*</span></label>
           <label id="label_Stamp_Paper_Proof_Scan" class="file-zone">
             <span class="file-zone-icon">🔏</span>
             <span class="file-zone-title">Upload Stamp Proof</span>
-            <span class="file-zone-hint">PDF Only · Max 475 KB</span>
+            <span class="file-zone-hint" id="stamp-paper-hint">PDF Only · Max 475 KB</span>
             <input type="file" data-file-id="Stamp_Paper_Proof_Scan" data-block-target="verificationBlock" accept="application/pdf" data-max-kb="475" onchange="handleFileChange(this)">
           </label>
           <span class="field-err-msg" id="err-file-Stamp_Paper_Proof_Scan">⚠ PDF required</span>
@@ -902,9 +902,14 @@ body.uploading .submit-btn { opacity: 0.7; }
       </div>
 
       <div class="field">
-        <label class="field-label">Property Structural Text (From Jamabandi) <span class="req">*</span></label>
-        <textarea id="propertyParagraphField" class="field-input" placeholder="Paste full structural details — Khewat, Khatouni, Khasra, Hadbast, Kanal/Marla data maps..."></textarea>
-        <span class="field-err-msg" id="err-propertyParagraphField">⚠ Required</span>
+        <label class="field-label">Property Structural Document (From Jamabandi) <span class="req">*</span></label>
+        <label id="label_Property_Structural_Doc" class="file-zone">
+          <span class="file-zone-icon">📝</span>
+          <span class="file-zone-title">Upload Property Para (.docx)</span>
+          <span class="file-zone-hint">Word Document Only · Max 500 KB</span>
+          <input type="file" data-file-id="Property_Structural_Doc" data-block-target="verificationBlock" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" data-max-kb="500" data-file-type="docx" onchange="handleFileChange(this)">
+        </label>
+        <span class="field-err-msg" id="err-file-Property_Structural_Doc">⚠ Word document (.docx) required</span>
       </div>
 
       <div class="field" style="margin-top:4px;">
@@ -969,6 +974,16 @@ function toggleDeedSections() {
     const block = document.getElementById(`deed-${id}-block`);
     if(block) block.classList.toggle('visible', id === val);
   });
+  /* ── Stamp Paper: optional for Transfer Deed, mandatory for all others ── */
+  const stampStar = document.getElementById('stamp-paper-req-star');
+  const stampHint = document.getElementById('stamp-paper-hint');
+  if (val === 'transfer') {
+    if (stampStar) stampStar.style.display = 'none';
+    if (stampHint) stampHint.textContent = 'PDF Only · Max 475 KB · Optional for Transfer Deed';
+  } else {
+    if (stampStar) stampStar.style.display = '';
+    if (stampHint) stampHint.textContent = 'PDF Only · Max 475 KB';
+  }
 }
 
 function toggleProfileFields(party, profileType) {
@@ -998,10 +1013,30 @@ function handleFileChange(inputEl) {
   const labelEl = document.getElementById('label_' + fileId);
   if (!fileId || !labelEl) return;
 
-  if (file.type !== 'application/pdf') {
-    alert('Invalid format. System ledgers accept PDF standard vectors only.');
-    inputEl.value = '';
-    return;
+  const fileType = inputEl.getAttribute('data-file-type') || 'pdf';
+
+  if (fileType === 'docx') {
+    /* ── DOCX VALIDATION ─────────────────────────────────────────────
+       On Android, .docx files are frequently sent as 'application/octet-stream'
+       or 'application/zip' by the file picker — MIME type is unreliable.
+       On iOS, MIME type can be an empty string entirely.
+       Therefore: validate by FILE EXTENSION as the primary check.
+       The accept attribute on the input is kept for UX filtering on
+       desktop and partial filtering on mobile, but is NOT relied upon
+       for actual validation here.
+    ─────────────────────────────────────────────────────────────────── */
+    const ext = file.name.split('.').pop().toLowerCase();
+    if (ext !== 'docx') {
+      alert('Invalid format. This field requires a Word document (.docx) only.');
+      inputEl.value = '';
+      return;
+    }
+  } else {
+    if (file.type !== 'application/pdf') {
+      alert('Invalid format. System ledgers accept PDF standard vectors only.');
+      inputEl.value = '';
+      return;
+    }
   }
 
   const maxKb = parseInt(inputEl.getAttribute('data-max-kb') || '475', 10);
@@ -1106,10 +1141,30 @@ function getPartyName(partyType) {
 }
 
 function convertFileToBase64(file) {
-  return new Promise(resolve => {
+  /* ── MOBILE-SAFE BASE64 ENCODER ──────────────────────────────────────
+     readAsDataURL() is broken on mobile: Android/iOS can truncate the
+     result buffer under memory pressure, producing corrupted Base64 that
+     lands as a damaged file in Drive.
+     Fix: readAsArrayBuffer() reads the raw bytes fully into memory first,
+     then we manually encode in 8 KB chunks to avoid stack overflow on
+     large files. This is the only reliable cross-platform method.
+  ─────────────────────────────────────────────────────────────────── */
+  return new Promise((resolve) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.readAsArrayBuffer(file);
+    reader.onload = () => {
+      try {
+        const bytes = new Uint8Array(reader.result);
+        const CHUNK = 8192;
+        let binary = '';
+        for (let i = 0; i < bytes.length; i += CHUNK) {
+          binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
+        }
+        resolve(btoa(binary));
+      } catch (e) {
+        resolve(null);
+      }
+    };
     reader.onerror = () => resolve(null);
   });
 }
@@ -1164,8 +1219,10 @@ function validateForm() {
   });
 
   ['Witness_1_Aadhaar', 'Witness_2_Govt_ID'].forEach(checkFile);
-  ['witness1Mobile', 'witness2Mobile', 'propertyAddress', 'propertySizeAndValue', 'propertyParagraphField'].forEach(checkField);
-  ['Original_Jamabandi', 'Previous_Registration_Deed', 'Stamp_Paper_Proof_Scan'].forEach(checkFile);
+  ['witness1Mobile', 'witness2Mobile', 'propertyAddress', 'propertySizeAndValue'].forEach(checkField);
+  ['Original_Jamabandi', 'Previous_Registration_Deed'].forEach(checkFile);
+  checkFile('Property_Structural_Doc');
+  if (deedType !== 'transfer') checkFile('Stamp_Paper_Proof_Scan');
 
   if (!document.getElementById('clearanceCheckpoint').checked) {
     const box = document.getElementById('clearanceBox');
@@ -1185,7 +1242,7 @@ function assemblePayload() {
     meta_buyerName: getPartyName('buyer'),
     meta_propertyAddress: (document.getElementById('propertyAddress').value || '').trim(),
     meta_propertySizeValue: (document.getElementById('propertySizeAndValue').value || '').trim(),
-    meta_propertyParagraph: (document.getElementById('propertyParagraphField').value || '').trim(),
+    meta_propertyStructuralDoc: 'Uploaded via file',
     intakeBlock: { staffName: document.getElementById('assignedExecutiveField').value.trim(), deedType: deedType.toUpperCase() },
     sellerBlock: { sellerProfile: document.querySelector('input[name="sellerProfile"]:checked').value },
     buyerBlock: { buyerProfile: document.querySelector('input[name="buyerProfile"]:checked').value },
@@ -1214,7 +1271,7 @@ function assemblePayload() {
   });
 
   ['witness1Mobile', 'witness2Mobile'].forEach(id => syncField('witnessBlock', id, id));
-  ['propertyAddress', 'propertySizeAndValue', 'propertyParagraphField'].forEach(id => syncField('verificationBlock', id, id));
+  ['propertyAddress', 'propertySizeAndValue'].forEach(id => syncField('verificationBlock', id, id));
 
   getVisibleFileInputs().forEach(inp => {
     const fId = inp.getAttribute('data-file-id');
